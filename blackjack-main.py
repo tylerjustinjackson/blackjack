@@ -109,17 +109,6 @@ Total: {total(userhand)}
                     playagain()  # play again?
                     break
 
-#                 else:
-#                     x = finalcalc(userhand, computerhand)
-#                     if x == False:
-#                         print(f'''Your hand: {userhand}
-# Total: {total(userhand)}
-# ''')
-#                         print(f'''Computer hand: {computerhand}
-# {total(computerhand)}''')
-#                     else:
-#                         break
-
         elif x == 'n' or x == 'no':  # if user does not hit
 
             if total(computerhand) <= 17:  # if computer score is not over 17
