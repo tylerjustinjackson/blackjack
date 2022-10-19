@@ -1,13 +1,13 @@
-# userplay function
+
 from random import choice
 from blackjackart import art
 import time
 
-choices = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10,
+choices = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10,  # all cards in deck
            10, 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10]
 
 
-def calcwin(userhand, computerhand):
+def calcwin(userhand, computerhand):  # calculates win based on scores and blackjack rules
 
     if total(userhand) == 21 and total(computerhand) == 21:
         print('')
@@ -38,7 +38,7 @@ def calcwin(userhand, computerhand):
         return False
 
 
-def finalcalc(userhand, computerhand):
+def finalcalc(userhand, computerhand):  # if user does not hit, final score calculations
 
     if total(userhand) > total(computerhand):
         winner()
@@ -53,14 +53,14 @@ def finalcalc(userhand, computerhand):
         playagain()
 
 
-def main():
+def main():  # main gameplay
 
     computerhand = []
     userhand = []
     computerhand, userhand = starthand(computerhand, userhand)
 
-    print('')
-    print(f'''Your hand: {userhand}
+    print('')  # prints hands to terminal
+    print(f'''Your hand: {userhand} 
 Total: {total(userhand)}
 ''')
     print(f'''Computer hand: {computerhand}
@@ -69,61 +69,72 @@ Total: {total(userhand)}
     if x == True:
         playagain()
 
-    while True:
+    while True:  # loops through gameplay, until someone wins
 
         print('')
         x = input('Do you want to hit? (Y/N) ').strip().lower()
         print("")
         print('')
 
-        if x == 'y' or x == 'yes':
+        if x == 'y' or x == 'yes':  # if you want to hit...
             userhand = addmove(userhand)
             win = calcwin(userhand, computerhand)
 
-            if win == True:
+            if win == True:  # if someone wins
                 print(f'''Your hand: {userhand}
 Total: {total(userhand)}
 ''')
                 print(f'''Computer hand: {computerhand}
 Total: {total(computerhand)}''')
-                playagain()
+                playagain()  # play again?
                 break
 
-            else:
-                computerhand = addmove(computerhand)
+            else:  # if no one wins yet
+                computerhand = addmove(computerhand)  # computer moves
                 print(f'''Your hand: {userhand}
 Total: {total(userhand)}
 ''')
                 print(f'''Computer hand: {computerhand}
 Total: {total(computerhand)}
 ''')
-                win = calcwin(userhand, computerhand)
+                win = calcwin(userhand, computerhand)  # see if there is a win
 
-                if win == True:
+                if win == True:  # if win
 
                     print(f'''Your hand: {userhand}
 Total: {total(userhand)}
 ''')
                     print(f'''Computer hand: {computerhand}
 {total(computerhand)}''')
-                    playagain()
+                    playagain()  # play again?
                     break
 
-        elif x == 'n' or x == 'no':
+#                 else:
+#                     x = finalcalc(userhand, computerhand)
+#                     if x == False:
+#                         print(f'''Your hand: {userhand}
+# Total: {total(userhand)}
+# ''')
+#                         print(f'''Computer hand: {computerhand}
+# {total(computerhand)}''')
+#                     else:
+#                         break
 
-            if total(computerhand) <= 17:
-                computerhand = addmove(computerhand)
+        elif x == 'n' or x == 'no':  # if user does not hit
+
+            if total(computerhand) <= 17:  # if computer score is not over 17
+                computerhand = addmove(computerhand)  # computer move
                 print(f'''Your hand: {userhand}
 Total: {total(userhand)}
 ''')
                 print(f'''Computer hand: {computerhand}
 {total(computerhand)}
 ''')
-                x = calcwin(userhand, computerhand)
-                if x == False:
+                x = calcwin(userhand, computerhand)  # calc
+                if x == False:  # see who scored higher
                     finalcalc(userhand, computerhand)
                     break
-                playagain()
+                playagain()  # play again?
                 break
 
             else:
@@ -132,7 +143,7 @@ Total: {total(userhand)}
                 break
 
 
-def playagain():
+def playagain():  # play again function
     print('')
 
     while True:
@@ -140,45 +151,45 @@ def playagain():
         again = input(
             "Would you like to play Black Jack again? (Y/N) ").strip().lower()
 
-        if again == 'y' or again == 'yes':
+        if again == 'y' or again == 'yes':  # if want to play again....
             print('')
             main()
             break
 
-        elif again == 'n' or again == 'no':
+        elif again == 'n' or again == 'no':  # if done with game
             time.sleep(1)
             print('OKAY! TAKE CARE!!!')
             print(art)
-            exit()
-
+            exit()  # exit program
             break
 
         else:
+            # put in right input before moving on
             print('Invalid input...', end='')
             continue
 
 
-def computerwin():
+def computerwin():  # computer win function
     print('HARD LUCK! THE COMPUTER BEAT YOU!')
     print('')
 
 
-def draw():
+def draw():  # tie function
     print('FAIR GAME! YOU AND THE COMPUTER TIED!')
     print('')
 
 
-def winner():
+def winner():  # user win function
     print('CONGRATS YOU\'RE A WINNER!')
     print('')
 
 
-def addmove(y):
+def addmove(y):  # user/computer move function
     y.append(choice(choices))
     return y
 
 
-def starthand(c, u):
+def starthand(c, u):  # starting hands function
 
     for _ in range(2):
 
@@ -188,7 +199,7 @@ def starthand(c, u):
     return c, u
 
 
-def total(list):
+def total(list):  # adds up all values of list
 
     r = 0
 
@@ -198,18 +209,18 @@ def total(list):
     return r
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # main running code
 
     try:
         print(art)
         print('')
         first = input('Do you want to play BlackJack? (Y/N) ').strip().lower()
 
-        if first == 'y' or first == 'yes':
+        if first == 'y' or first == 'yes':  # if want to play...
             time.sleep(1)
             main()
 
-        elif first == 'n' or first == 'no':
+        elif first == 'n' or first == 'no':  # if you do not want to play...
             time.sleep(1)
             print('Okay! Take care!!!')
 
